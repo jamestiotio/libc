@@ -126,10 +126,6 @@ static void strtod_test(void** state)
 	{
 		double x = strtod(t[i].s, &p);
 
-#include <stdio.h>
-		printf("i: %zu, Distance: %lld, fabs: %f\n", i, ulpsDistanceDouble(x, t[i].f),
-			   fabs(x - t[i].f));
-
 		switch(t[i].comparison)
 		{
 			case ANY_COMPARISON:
