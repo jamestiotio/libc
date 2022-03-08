@@ -102,7 +102,7 @@ static void strtod_test(void** state)
 		// failing when close to zero, so we fall back to an absolute
 		// epsilon comparison in that case.
 #include <stdio.h>
-		printf("Distance: %ld, fabs: %ld\n", distance, fabs(x - t[i].f));
+		printf("Distance: %ld, fabs: %f\n", distance, fabs(x - t[i].f));
 		assert_true((distance < 3) || (fabs(x - t[i].f) < epsilon));
 	}
 }
