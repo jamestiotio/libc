@@ -4,6 +4,7 @@
  */
 
 #include "stdlib_tests.h"
+#include "test/ulpsDistance.h"
 #include <math.h>
 #include <stdlib.h>
 
@@ -90,13 +91,15 @@ static const double epsilon = (double)0.000000000000001;
 
 static void atof_test(void** state)
 {
-	double x;
-
 	for(size_t i = 0; i < length(t); i++)
 	{
-		x = atof(t[i].s);
-		// printf("%d: %1.30f == %1.30f\n", i, x, t[i].f);
-		assert_true(fabs(x - t[i].f) < epsilon);
+		double x = atof(t[i].s);
+		int64_t distance = ulpsDistanceDouble(x, t[i].f);
+
+		// We check both ULP and an absolute epsilon because ULP is
+		// failing when close to zero, so we fall back to an absolute
+		// epsilon comparison in that case.
+		assert_true((distance < 3) || (fabs(x - t[i].f) < epsilon));
 	}
 }
 
