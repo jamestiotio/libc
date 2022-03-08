@@ -101,6 +101,7 @@ static void strtod_test(void** state)
 		// We check both ULP and an absolute epsilon because ULP is
 		// failing when close to zero, so we fall back to an absolute
 		// epsilon comparison in that case.
+#include <stdio.h>
 		printf("Distance: %ld, fabs: %ld\n", distance, fabs(x - t[i].f));
 		assert_true((distance < 3) || (fabs(x - t[i].f) < epsilon));
 	}
